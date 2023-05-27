@@ -7,6 +7,7 @@ const viewAuthor = (obj) => {
   let domString = `
   <div class="text-white ms-5 details">
      ${obj.first_name} ${obj.last_name} ${obj.favorite ? '<span class="badge bg-danger"><i class="fa fa-heart" aria-hidden="true"></i></span>' : ''}</h5>
+     <br>
      Author Email: <a href="mailto:${obj.email}">${obj.email}</a>     
   </div>
   <div class="mt-5 d-flex flex-wrap">`;
