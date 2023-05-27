@@ -3,7 +3,7 @@ import renderToDOM from '../utils/renderToDom';
 
 const viewAuthor = (obj) => {
   clearDom();
-  console.warn(obj.authorBooks);
+  console.warn(obj);
   let domString = `
   <div class="text-white ms-5 details">
      ${obj.first_name} ${obj.last_name} ${obj.favorite ? '<span class="badge bg-danger"><i class="fa fa-heart" aria-hidden="true"></i></span>' : ''}</h5>
@@ -11,7 +11,7 @@ const viewAuthor = (obj) => {
   </div>
   <div class="mt-5 d-flex flex-wrap">`;
   let domStringBook = '';
-  obj.forEach((book) => {
+  obj.authorBooks.forEach((book) => {
     domStringBook += `<div class="card">
     <img class="card-img-top" src=${book.image} alt=${book.title} style="height: 400px;">
     <div class="card-body" style="height: 180px;">
