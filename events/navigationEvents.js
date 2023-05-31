@@ -5,19 +5,19 @@ import { showBooks } from '../pages/books';
 import { signOut } from '../utils/auth';
 
 // navigation events
-const navigationEvents = () => {
+const navigationEvents = (uid) => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
 
   // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    booksOnSale().then(showBooks);
+    booksOnSale(uid).then(showBooks);
   });
 
   // ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    getBooks().then((books) => showBooks(books));
+    getBooks(uid).then((books) => showBooks(books));
   });
 
   // FIXME: STUDENTS Create an event listener for the Authors
@@ -25,7 +25,7 @@ const navigationEvents = () => {
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
-    getAuthors().then((authors) => {
+    getAuthors(uid).then((authors) => {
       if (authors.length === 0) {
         emptyAuthors();
       } else {
@@ -35,7 +35,7 @@ const navigationEvents = () => {
   });
 
   document.querySelector('#favorite-authors').addEventListener('click', () => {
-    favoriteAuthor().then(showAuthors);
+    favoriteAuthor(uid).then(showAuthors);
   });
 
   // STRETCH: SEARCH

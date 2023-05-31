@@ -3,8 +3,8 @@
 const endpoint = 'https://almost-f3d5e-default-rtdb.firebaseio.com/';
 
 // FIXME:  GET ALL AUTHORS
-const getAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json`, {
+const getAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -75,15 +75,18 @@ const updateAuthor = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const favoriteAuthor = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
+const favoriteAuthor = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      const favorite = Object.values(data).filter((item) => item.favorite);
+      resolve(favorite);
+    })
     .catch(reject);
 });
 
